@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+// import org.openqa.selenium.edge.EdgeDriver;
+// import org.openqa.selenium.edge.EdgeOptions;
 // import org.openqa.selenium.firefox.FirefoxDriver;
 // import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -24,6 +26,9 @@ public class CommonBaseTest {
 //        options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
 //        WebDriverManager.firefoxdriver().setup();
 //        driver = new FirefoxDriver(options);
+
+//        WebDriverManager.edgedriver().setup();
+//        driver = new EdgeDriver();
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);

@@ -17,7 +17,7 @@ public class MainPage {
     // Локатор Кнопки заказа в хэдере сайта
     private final By headerOrderButton = By.className("Button_Button__ra12g");
     // Локатор кнопки заказа в середине сайта
-    private final By middleOrderButton = By.xpath("//*[@id=\"root\"]/div/div/div[4]/div[2]/div[5]/button");
+    private final By middleOrderButton = By.xpath("//*[@id='root']/div/div/div[4]/div[2]/div[5]/button");
     //By.cssSelector(".Button_UltraBig__UU3Lp");
 
     // Массив локаторов кнопок с вопросами
