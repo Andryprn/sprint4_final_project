@@ -3,6 +3,10 @@ package pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.hamcrest.MatcherAssert;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertTrue;
 
 // Элементы данных страницы "Про аренду"
 public class RentPage {
@@ -22,14 +26,12 @@ public class RentPage {
     // Локатор кнопки "Заказать"
     private final By orderButton = By.xpath(".//button[(@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать')]");
     // Локатор кнопки "Да" оформления заказа
-    private final By orderButtonYes = By.xpath(".//*[@id='root']/div/div[2]/div[5]/div[2]/button[2]");
+    private final By orderButtonYes = By.xpath(".//button[(@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да')]");
     // Локатор модального окна
     private final By modalOrderWindow = By.xpath(".//div[contains(@class, 'Order_ModalHeader')]");
+    // Локатор кнопки посмотреть статус
+    private final By viewStatusButton = By.xpath(".//button[contains(text(),'Посмотреть статус')]");
 
-    // Модальное окно "Заказ Оформлен"
-    public boolean isModalOrderWindowDisplayed() {
-        return driver.findElement(modalOrderWindow).isDisplayed();
-    }
 
     // Конструктор класса
     public RentPage(WebDriver driver) {
@@ -76,7 +78,27 @@ public class RentPage {
 
     // Клик по кнопке "Да" оформления заказа
     public RentPage clickOrderButtonYes() {
+        //new WebDriverWait(driver, 5)
+        //        .until(ExpectedConditions.elementToBeClickable(orderButtonYes));
         driver.findElement(orderButtonYes).click();
+        return this;
+    }
+
+    // Модальное окно "Заказ Оформлен"
+    public RentPage checkModalOrderWindowIsDisplayed() {
+        assertTrue("Окно оформления заказа не появилось", driver.findElement(modalOrderWindow).isDisplayed());
+        return this;
+    }
+
+    // Подтверждение оформления заказа
+    public RentPage checkOrderConfirmation() {
+        String orderConfirmationText = driver.findElement(modalOrderWindow).getText();
+        MatcherAssert.assertThat(orderConfirmationText, containsString("Заказ оформлен"));
+        return this;
+    }
+
+    public RentPage clickOnViewStatusButton() {
+        driver.findElement(viewStatusButton).click();
         return this;
     }
 }

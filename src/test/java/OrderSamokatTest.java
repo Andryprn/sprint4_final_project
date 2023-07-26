@@ -3,8 +3,6 @@ import pageObjects.OrderPage;
 import pageObjects.RentPage;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-
 public class OrderSamokatTest extends CommonBaseTest {
 
     // Тест заказа через кнопку в хэдере
@@ -23,15 +21,16 @@ public class OrderSamokatTest extends CommonBaseTest {
                 .sendDeliveryClientPhoneNumber("89998887766")
                 .clickNextButton();
 
-        boolean isDisplayed = new RentPage(driver)
+        new RentPage(driver)
                 .sendRentalDate("28.03.2025")
                 .setRentalTime()
                 .clickCheckBoxColourBlackPearl()
                 .sendComment("Если можно, то новый")
                 .clickOrderButton()
                 .clickOrderButtonYes()
-                .isModalOrderWindowDisplayed();
-        assertTrue("Окно заказа не появилось", isDisplayed);
+                .checkModalOrderWindowIsDisplayed()
+                .checkOrderConfirmation()
+                .clickOnViewStatusButton();
     }
 
     // Тест заказа через кнопку в середине страницы
@@ -50,14 +49,15 @@ public class OrderSamokatTest extends CommonBaseTest {
                 .sendDeliveryClientPhoneNumber("87776996969")
                 .clickNextButton();
 
-        boolean isDisplayed = new RentPage(driver)
+        new RentPage(driver)
                 .sendRentalDate("07.01.2023")
                 .setRentalTime()
                 .clickCheckBoxColourGreyDespair()
                 .sendComment("Серый")
                 .clickOrderButton()
                 .clickOrderButtonYes()
-                .isModalOrderWindowDisplayed();
-        assertTrue("Окно заказа не появилось", isDisplayed);
+                .checkModalOrderWindowIsDisplayed()
+                .checkOrderConfirmation()
+                .clickOnViewStatusButton();
     }
 }
